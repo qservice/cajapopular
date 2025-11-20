@@ -3,10 +3,15 @@ FROM node:20-alpine
 # Install curl for health checks
 RUN apk add --no-cache curl
 
+
+
 WORKDIR /app
+RUN mkdir -p /app/dist && chmod -R g+rwX /app
 
 # Copy package files
 COPY package*.json ./
+COPY src/*.js /app/dist/
+
 
 # Install dependencies (using npm install for development)
 RUN npm install
